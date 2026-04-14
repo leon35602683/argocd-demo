@@ -26,13 +26,3 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/docker-fastapi:${{ github.sha }}
 
-      - name: Update Config Repo
-        run: |
-          git clone https://x-access-token:${{ secrets.CONFIG_REPO_TOKEN }}@github.com/4-learn/argocd-config.git
-          cd argocd-config
-          sed -i "s|image: .*/docker-fastapi:.*|image: ${{ secrets.DOCKER_USERNAME }}/docker-fastapi:${{ github.sha }}|" deployment.yaml
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
-          git add deployment.yaml
-          git commit -m "chore: update image to ${{ github.sha }}"
-          git push
