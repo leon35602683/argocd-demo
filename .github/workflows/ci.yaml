@@ -28,7 +28,7 @@ jobs:
 
       - name: Update Config Repo
         run: |
-          git clone https://x-access-token:${{ secrets.CONFIG_REPO_TOKEN }}@github.com/leon35602683/argocd-demo.git
+          git clone https://x-access-token:${{ secrets.CONFIG_REPO_TOKEN }}@github.com/leon35602683/argocd-config.git
           cd argocd-config
           sed -i "s|image: .*/docker-fastapi:.*|image: ${{ secrets.DOCKER_USERNAME }}/docker-fastapi:${{ github.sha }}|" deployment.yaml
           git config user.name "github-actions"
